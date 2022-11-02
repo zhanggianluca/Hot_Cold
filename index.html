@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet">
+    <title>Hot and Cold</title>
+
+    <script>
+        function initialize() {
+            outputDiv = document.getElementById("output"); 
+            guess = 50; 
+            numberLog = document.getElementById("lognum"); 
+            respLog = document.getElementById("logresp"); 
+            response = ""; 
+            getResponse(); 
+            guessRemaining = document.getElementById("remain"); 
+            guesses = 5; 
+            number = Math.floor(Math.random()*501); 
+
+            display(); 
+        }
+
+        function getResponse() {
+            if (Math.abs(guess-number) <= 5) {
+                response = "Very Hot"; 
+            }
+            else if (Math.abs(guess-number))
+        }
+    </script>
+</head>
+<body>
+    <div id="output"></div>
+    <div id="lognum"></div>
+    <div id="logresp"></div>
+    <button id="addOne"></button>
+    <button id="subOne"></button>
+    <button id="addFive"></button>
+    <button id="subFive"></button>
+    <button id="addTen"></button>
+    <button id="subTen"></button>
+    <button id="add25"></button>
+    <button id="sub25"></button>
+    <div id="remain"></div>
+    <button id="commit">Guess</button>
+    <button id="reset">Reset</button>
+</body>
+</html>
