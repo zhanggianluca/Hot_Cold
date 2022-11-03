@@ -9,41 +9,177 @@
 
     <script>
         function initialize() {
+            number = Math.floor(Math.random()*501);
+
             outputDiv = document.getElementById("output"); 
             guess = 50; 
+            outputDiv.innerHTML = guess; 
+
             numberLog = document.getElementById("lognum"); 
+            numberLog.innerHTML = "<br>" + guess; 
+
             respLog = document.getElementById("logresp"); 
             response = ""; 
             getResponse(); 
+            respLog.innerHTML = "<br>" + response;
+
             guessRemaining = document.getElementById("remain"); 
             guesses = 5; 
-            number = Math.floor(Math.random()*501); 
+            guessRemaining.innerHTML = "Guesses Remaining: " + guesses; 
 
-            display(); 
+            winningStatement = document.getElementById("win"); 
+            winningStatement.innerHTML = ""; 
+            console.log(number);  
+
         }
 
         function getResponse() {
             if (Math.abs(guess-number) <= 5) {
                 response = "Very Hot"; 
             }
-            else if (Math.abs(guess-number))
+            else if (Math.abs(guess-number) <= 8 && Math.abs(guess-number) >= 6) {
+                response = "Hot";
+            }
+            else if (Math.abs(guess-number) <= 15 && Math.abs(guess-number) >= 9) {
+                response = "Very Warm";
+            }
+            else if (Math.abs(guess-number) <= 20 && Math.abs(guess-number) >= 16) {
+                response = "Warm";
+            }
+            else if (Math.abs(guess-number) <= 30 && Math.abs(guess-number) >= 21) {
+                response = "Cool";
+            }
+            else if (Math.abs(guess-number) <= 40 && Math.abs(guess-number) >= 31) {
+                response = "Very Cool";
+            }
+            else if (Math.abs(guess-number) <= 55 && Math.abs(guess-number) >= 41) {
+                response = "Cold";
+            }
+            else {
+                response = "Very Cold"; 
+            }
         }
+
+        function addOne() {
+            guess++; 
+            outputDiv.innerHTML = guess; 
+        }
+
+        function subOne() {
+            guess--; 
+            if (guess < 0) {
+                guess = 0; 
+            }
+            outputDiv.innerHTML = guess; 
+        }
+
+        function addFive() {
+            guess = guess + 5; 
+            outputDiv.innerHTML = guess; 
+        }
+
+        function subFive() {
+            guess = guess - 5; 
+            if (guess < 0) {
+                guess = 0; 
+            }
+            outputDiv.innerHTML = guess; 
+        }
+
+        function addTen() {
+            guess = guess + 10; 
+            outputDiv.innerHTML = guess; 
+        }
+
+        function subTen() {
+            guess = guess - 10;
+            if (guess < 0) {
+                guess = 0; 
+            } 
+            outputDiv.innerHTML = guess; 
+        }
+
+        function add25() {
+            guess = guess + 25; 
+            outputDiv.innerHTML = guess; 
+        }
+
+        function sub25() {
+            guess = guess -25;
+            if (guess < 0) {
+                guess = 0; 
+            } 
+            outputDiv.innerHTML = guess; 
+        }
+
+        function logNumber() { 
+            if (guesses != 0) {
+                numberLog.innerHTML += "<br>" + guess;
+            }
+        }
+
+        function logResponse() {
+            if (guesses != 0) {
+                respLog.innerHTML += "<br>" + response;
+            }   
+        }
+
+        function subGuess() {
+            guesses--; 
+            if (guesses < 0) {
+                guesses = 0; 
+            }
+            guessRemaining.innerHTML = "Guesses Remaning: " + guesses; 
+        }
+
+        function submit() {
+            subGuess(); 
+            getResponse(); 
+            logNumber(); 
+            logResponse(); 
+            win(); 
+            lose(); 
+        }
+
+        function win() {
+            if (guess == number) {
+                winningStatement.innerHTML = "Congratulations, you have guessed the number!"; 
+            }
+        }
+
+        function lose() {
+            if (guess != number && guesses == 0) {
+                winningStatement.innerHTML = "Unfortunately, the number was " + number + ". You couldn't guess the number within five guesses. Try Again"; 
+            }
+        }
+
+        function reset() {
+            initialize(); 
+        }
+
+
     </script>
 </head>
-<body>
+<body onload="initialize();">
+    <div id="remain"></div>
+    <div id="heading">Your Guess:</div>
     <div id="output"></div>
+    <div id="buttons">
+        <button id="sub" onclick="sub25();">-25</button>
+        <button id="sub" onclick="subTen();">-10</button>
+        <button id="sub" onclick="subFive();">-5</button>
+        <button id="sub" onclick="subOne();">-1</button>
+        <button onclick="submit();" id="subbtn">Guess</button>
+        <button onclick="reset();" id="resetbtn">Reset</button>
+        <button id="add" onclick="addOne();">+1</button>
+        <button id="add" onclick="addFive();">+5</button>
+        <button id="add" onclick="addTen();">+10</button>
+        <button id="add" onclick="add25();">+25</button>
+    </div>
+    <p style="color:#2d9af3" id="guesses">Guesses </p>
+    <p style="color:#ff0000" id="responses">Responses </p>
     <div id="lognum"></div>
     <div id="logresp"></div>
-    <button id="addOne"></button>
-    <button id="subOne"></button>
-    <button id="addFive"></button>
-    <button id="subFive"></button>
-    <button id="addTen"></button>
-    <button id="subTen"></button>
-    <button id="add25"></button>
-    <button id="sub25"></button>
-    <div id="remain"></div>
-    <button id="commit">Guess</button>
-    <button id="reset">Reset</button>
+    <div id="win"></div>
 </body>
 </html>
