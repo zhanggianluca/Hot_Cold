@@ -9,7 +9,7 @@
 
     <script>
         function initialize() {
-            number = Math.floor(Math.random()*501);
+            number = Math.floor(Math.random()*101);
 
             outputDiv = document.getElementById("output"); 
             guess = 50; 
@@ -133,12 +133,19 @@
         }
 
         function submit() {
-            subGuess(); 
-            getResponse(); 
-            logNumber(); 
-            logResponse(); 
-            win(); 
-            lose(); 
+            if (guess > 100 || guess < 0) {
+                winningStatement.innerHTML = "Your guess must be a number within 1-100"; 
+            }
+            else {
+                winningStatement.innerHTML = ""; 
+                subGuess(); 
+                getResponse(); 
+                logNumber(); 
+                logResponse(); 
+                win(); 
+                lose(); 
+            }
+            
         }
 
         function win() {

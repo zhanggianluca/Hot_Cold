@@ -96,6 +96,9 @@ p {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40px;   
     text-align: center; 
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
 }
 
 
